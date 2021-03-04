@@ -1,3 +1,5 @@
+ARG mock=0
+
 FROM ubuntu:18.04
 
 MAINTAINER michele.gazzetti1@ibm.com
@@ -5,6 +7,11 @@ MAINTAINER michele.gazzetti1@ibm.com
 RUN apt-get update && \
 	apt-get install -y libocxl-dev
 
+ADD . /libthymesisflow
+WORKDIR /libthymesisflow
+
+RUN make MOCK=$mock
+
 COPY ./bin/thymesisf-agent /usr/bin/
-	
+
 ENTRYPOINT ["/usr/bin/thymesisf-agent"]

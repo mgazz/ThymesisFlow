@@ -1,0 +1,14 @@
+FROM ubuntu:18.04
+
+MAINTAINER michele.gazzetti1@ibm.com
+
+
+RUN apt update && apt install build-essential -y
+
+ADD . /libthymesisflow
+WORKDIR /libthymesisflow
+
+RUN make MOCK=1 && \
+    cp ./bin/thymesisf-agent /usr/bin/
+
+ENTRYPOINT ["/usr/bin/thymesisf-agent"]

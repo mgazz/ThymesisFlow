@@ -19,7 +19,9 @@
 
 #include "logger.h"
 #include <fcntl.h>
-#include <libocxl.h>
+#ifndef MOCK
+#include "libocxl.h"
+#endif
 #include <pthread.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -30,10 +32,11 @@
 #define PERIOD_SEC 1
 #define THYMESISCOUNT_PATH "/tmp/thymesispcount"
 
+#ifndef MOCK
 struct thread_args {
-    ocxl_mmio_h global;
-    int fd;
-    int period;
+  ocxl_mmio_h global;
+  int fd;
+  int period;
 };
 
 typedef struct thread_args t_args;
@@ -42,5 +45,6 @@ typedef struct thread_args t_args;
 // period);
 int start_stats_thread(pthread_t **tid, ocxl_mmio_h global);
 int stop_stats_thread(pthread_t *tid);
+#endif
 
 #endif

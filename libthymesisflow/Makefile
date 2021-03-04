@@ -73,7 +73,7 @@ $(BINDIR)/%: $(ODIR)/%.o
 cmds: $(CMD_BIN) 
 
 docker:
-	docker build --network=host -t thymesisflow:$(GIT_VERSION) .
+	docker build --network=host -t thymesisflow:$(GIT_VERSION) --build-arg mock=$(MOCK) -f dockerfiles/Dockerfile.$(shell uname -m) .
 
 
 .PHONY: all clean clean_tests cmds tests docs
