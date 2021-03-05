@@ -8,7 +8,9 @@ RUN apt update && apt install build-essential -y
 ADD . /libthymesisflow
 WORKDIR /libthymesisflow
 
+# on x86 we support only the mocking
 RUN make MOCK=1 && \
-    cp ./bin/thymesisf-agent /usr/bin/
+    cp ./bin/thymesisf-agent /usr/bin/ && \
+    chmod +x /usr/bin/thymesisf-agent
 
-ENTRYPOINT ["/usr/bin/thymesisf-agent"]
+CMD ["/usr/bin/thymesisf-agent"]
