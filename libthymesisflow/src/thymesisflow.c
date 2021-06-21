@@ -130,7 +130,7 @@ int attach_memory(const char *circuit_id, const char *afu_name,
     add_conn(conn);
 
 #ifdef MOCK
-    log_info_ext("mocking memory connection by allocating only %d bites...\n",size);
+    log_info_ext("mocking memory connection by allocating only %ld bites...\n",size);
 
     if (posix_memalign((void **)&conn->ea, CACHE_ALIGNMENT, (size)) != 0) {
         log_error_ext("unable to allocate %ld bytes memory\n", size);
