@@ -42,10 +42,13 @@ int main(int argc, char *argv[]) {
 
     int opt;
 
-    while ((opt = getopt(argc, argv, ":s")) != -1) {
+    while ((opt = getopt(argc, argv, ":s:")) != -1) {
+	fprintf(stderr, "opt: %d\n",opt);
+	assert (opt=='s');
         switch (opt) {
         case 's':
             sock_path = optarg;
+	    fprintf(stderr, "check sockpath: %s\n",sock_path);
             break;
         case '?':
             help();
